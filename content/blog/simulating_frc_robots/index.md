@@ -2,6 +2,10 @@
 title = "Simulating FRC Robots"
 date = 2024-08-24T10:23:24-04:00
 authors = ["Falon C"]
+
+[taxonomies]
+tags = ["frc", "simulation", "controls", "computervision", "logging"]
+categories = ["robotics"]
 +++
 
 Alright! Big project writeup time. I've recently been messing around with improving the simulation capabilities of my FRC team, 2537: The Space RAIDers. In the process of doing this I've done a lot of interesting things, so I'm putting them on paper so other people can learn from what I've done.
