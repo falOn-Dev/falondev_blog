@@ -13,6 +13,8 @@ This is the first entry in a series of blog posts talking about how and why I de
 
 Exploring the mechanisms in the order that a gamepiece would interface with them, the first mechanism I'd like to write about is our Rack and Pinion Intake, or "Lintake" (Linear Intake).
 
+<!-- more -->
+
 # Initial Mechanism Strategy
 My robotics team has had a history of failing to build successful intakes, in my four years on the team, we're like zero for six, so I wanted to make sure we got it right this time around.
 
