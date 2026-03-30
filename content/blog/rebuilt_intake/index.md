@@ -41,3 +41,8 @@ Once I have my layout and block CAD, the team begins to prototype based on them 
 Due to packaging constraints I couldn't fit a shaft going across to sync both sides, so they're independently powered, and kept in sync with software.
 
 For the roller, rather than using a full shaft going across, we use two little stub shafts to hold it in place, allowing the entire tube to bend in on impact without damaging a shaft going across. This is also the reason a majority of the intake is made of polycarbonate. Throughout our matches this intake has survived some heavy hits.
+
+# Conclusion
+tl;dr? This intake was build to be fast to fix, and tough. Considering it's the first functional intake we've built since COVID, and it's survived two full events AND been part of our first District Championship qualification since 2023, I'd call it a success.
+
+Next writeup will be looking in depth at the next part of the gamepiece path, our hopper and roller floor.
