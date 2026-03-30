@@ -1,6 +1,6 @@
 +++
 title = "FRC Mechanism Theory - Rebuilt Intake"
-date = 2026-03-30
+date = 2026-03-23
 authors = ["Falon C"]
 
 [taxonomies]
