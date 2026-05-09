@@ -1,5 +1,5 @@
 [package]
-name = "falon"
+name = "falondev"
 description = "Dark terminal-aesthetic blog theme matching the falon.dev resume style."
 license = "MIT"
 homepage = "https://blog.falon.dev"
