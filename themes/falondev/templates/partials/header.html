@@ -1,4 +1,8 @@
 <div class="site-header">
-    {% include "partials/logo.html" %}
+    <nav class="site-nav site-nav--left" aria-label="Home">
+        <ul>
+            <li><a href="{{ get_url(path='/') }}">home</a></li>
+        </ul>
+    </nav>
     {% include "partials/menu.html" %}
 </div>
