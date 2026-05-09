@@ -1,0 +1,12 @@
+<div class="site-footer">
+    <span>&copy; <time>{{ now() | date(format="%Y") }}</time>
+    {%- if config.author %} {{ config.author }}{%- endif %}</span>
+    <span>
+        {%- if config.generate_feeds -%}
+        {%- for feed in config.feed_filenames %}
+        <a href="{{ get_url(path=feed) }}">{{ feed | trim_end_matches(pat=".xml") | trim_end_matches(pat=".json") }}</a>
+        {%- endfor %}
+        {%- endif %}
+    </span>
+    <span>built with <a href="https://www.getzola.org">zola</a></span>
+</div>

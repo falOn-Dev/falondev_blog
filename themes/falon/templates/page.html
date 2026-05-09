@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{%- block title -%}{{ page.title }} | {{ config.title }}{%- endblock -%}
+
+{%- block description -%}
+{%- if page.description %}
+<meta name="description" content="{{ page.description | markdown(inline=true) | striptags }}">
+{%- elif page.summary %}
+<meta name="description" content="{{ page.summary | linebreaksbr | replace(from="<br>", to=" ") | striptags | trim_end_matches(pat=".") | safe }}...">
+{%- endif %}
+{%- endblock -%}
+
+{%- block main -%}
+<article class="post-article">
+    {{ post_macros::header(page=page, heading="h1") }}
+    <div class="post-content" id="continue-reading">
+{{ page.content | safe }}
+    </div>
+</article>
+
+{%- if page.lower or page.higher %}
+<nav class="post-nav">
+    {%- if page.lower %}
+    <div class="post-nav__prev">
+        <span class="post-nav__label">&lt; older</span>
+        <a rel="next" href="{{ page.lower.permalink | safe }}">{{ page.lower.title | truncate(length=60, end="...") }}</a>
+    </div>
+    {%- endif %}
+    {%- if page.higher %}
+    <div class="post-nav__next">
+        <span class="post-nav__label">newer &gt;</span>
+        <a rel="prev" href="{{ page.higher.permalink | safe }}">{{ page.higher.title | truncate(length=60, end="...") }}</a>
+    </div>
+    {%- endif %}
+</nav>
+{%- endif %}
+
+{% include "partials/comments.html" %}
+{%- endblock -%}
