@@ -1,0 +1,100 @@
+{%- import "macros/config.html" as config_macros -%}
+{%- import "macros/feed.html" as feed_macros -%}
+{%- import "macros/post.html" as post_macros -%}
+
+<!doctype html>
+<html lang="{{ lang }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include "partials/content_security_policy.html" %}
+    <title>{%- block title -%}{{ config.title }}{%- endblock -%}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap">
+    <link rel="stylesheet" href="{{ get_url(path="css/style.css", cachebust=true) }}">
+
+    {%- if config.extra.favicon %}
+    <link rel="icon" href="{{ get_url(path=config.extra.favicon) }}">
+    {%- elif config.extra.favicon_emoji %}
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>{{ config.extra.favicon_emoji }}</text></svg>">
+    {%- endif %}
+
+    {%- if current_url %}
+    <link rel="canonical" href="{{ current_url | safe }}">
+    {%- endif %}
+    {%- if config.generate_feeds %}
+    {%- for feed in config.feed_filenames %}
+    {{ feed_macros::link_alternate(filename=feed, title=config.title) }}
+    {%- endfor %}
+    {%- block feeds %}{%- endblock %}
+    {%- endif %}
+
+    {%- if page.authors %}
+    {%- for author in page.authors %}
+    <meta name="author" content="{{ author }}">
+    {%- endfor %}
+    {%- elif page and config.author %}
+    <meta name="author" content="{{ config.author }}">
+    {%- endif %}
+    {%- block description %}
+    {%- if config.description %}
+    <meta name="description" content="{{ config.description }}">
+    {%- endif %}
+    {%- endblock %}
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#090909">
+    <meta name="color-scheme" content="dark">
+
+    {%- if current_path and current_path == "/" %}
+    <meta property="og:title" content="{{ config.title }}">
+    {%- elif current_path %}
+    {%- set page_title = page.title | default(value=section.title | default(value=taxonomy.name | capitalize | default(value=config.title))) %}
+    <meta property="og:title" content="{{ page_title | replace(from='"', to="&quot;") | safe }}">
+    {%- endif %}
+    {%- if page %}
+    <meta property="og:type" content="article">
+    {%- else %}
+    <meta property="og:type" content="website">
+    {%- endif %}
+    {%- if current_url %}
+    <meta property="og:url" content="{{ page.permalink | default(value=section.permalink | default(value=current_url)) | safe }}">
+    {%- endif %}
+    {%- if page.description %}
+    <meta property="og:description" content="{{ page.description | markdown(inline=true) | striptags }}">
+    {%- elif page.summary %}
+    <meta property="og:description" content="{{ page.summary | linebreaksbr | replace(from="<br>", to=" ") | striptags | trim_end_matches(pat=".") | safe }}...">
+    {%- elif config.description %}
+    <meta property="og:description" content="{{ config.description }}">
+    {%- endif %}
+    <meta property="og:site_name" content="{{ config.title }}">
+    {%- if page.date %}
+    <meta property="article:published_time" content="{{ page.date | date(format="%+") }}">
+    {%- endif %}
+    {%- if page.updated %}
+    <meta property="article:modified_time" content="{{ page.updated | date(format="%+") }}">
+    {%- endif %}
+    {%- if page.taxonomies and page.taxonomies.tags %}
+    {%- for tag in page.taxonomies.tags %}
+    <meta property="article:tag" content="{{ tag }}">
+    {%- endfor %}
+    {%- endif %}
+</head>
+
+<body>
+    <div class="site-wrapper">
+        {%- block header %}
+        {% include "partials/header.html" %}
+        {%- endblock %}
+        <main id="main">
+            {%- block main %}{% endblock %}
+        </main>
+        {%- block footer %}
+        {% include "partials/footer.html" %}
+        {%- endblock %}
+    </div>
+</body>
+
+</html>

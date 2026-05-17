@@ -1,0 +1,75 @@
+{%- macro excerpt(page) -%}
+<article class="post-item">
+    <div class="post-item__title">
+        <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+    </div>
+    <div class="post-item__meta">
+        <span class="post-item__date">
+            <time datetime="{{ page.date }}">{{ page.date | date(format="%Y.%m.%d") }}</time>
+        </span>
+        {%- if page.reading_time %}
+        <span class="post-item__sep">//</span>
+        <span><time datetime="PT{{ page.reading_time }}M">{{ page.reading_time }} min</time> read</span>
+        {%- endif %}
+        {%- if page.draft %}
+        <span class="post-item__draft">DRAFT</span>
+        {%- endif %}
+    </div>
+    {%- if page.description %}
+    <p class="post-item__desc">{{ page.description | markdown(inline=true) | safe }}</p>
+    {%- elif page.summary %}
+    <p class="post-item__desc">{{ page.summary | striptags | truncate(length=200) }}</p>
+    {%- endif %}
+    {%- if page.taxonomies %}
+    <div class="post-item__tags">
+        {%- for tag in page.taxonomies.tags | default(value=[]) %}
+        {%- set tag_url = get_taxonomy_url(kind="tags", name=tag, lang=page.lang) %}
+        <span>#<a href="{{ tag_url | safe }}">{{ tag }}</a></span>
+        {%- endfor %}
+        {%- for cat in page.taxonomies.categories | default(value=[]) %}
+        {%- set cat_url = get_taxonomy_url(kind="categories", name=cat, lang=page.lang) %}
+        <span>{<a href="{{ cat_url | safe }}">{{ cat }}</a>}</span>
+        {%- endfor %}
+    </div>
+    {%- endif %}
+    <a class="post-item__read-more" href="{{ page.permalink | safe }}" aria-label="Read more about {{ page.title }}">read more &rarr;</a>
+</article>
+{%- endmacro -%}
+
+{%- macro header(page, heading, is_excerpt=false) -%}
+<header class="post-article__header">
+    <{{ heading }} class="post-article__title">{{ page.title }}</{{ heading }}>
+    <div class="post-article__meta">
+        <span title="Published on {{ page.date }}{%- if page.updated %}, last updated {{ page.updated }}{%- endif -%}">
+            <time datetime="{{ page.date }}">{{ page.date | date(format="%Y.%m.%d") }}</time>
+            {%- if page.updated %} &nbsp;[updated: <time datetime="{{ page.updated }}">{{ page.updated | date(format="%Y.%m.%d") }}</time>]{%- endif %}
+        </span>
+        {%- if page.reading_time %}
+        <span>//</span>
+        <span><time datetime="PT{{ page.reading_time }}M">{{ page.reading_time }} min</time> read</span>
+        {%- endif %}
+        {%- if page.authors %}
+        <span>//</span>
+        <span>{{ page.authors | join(sep=", ") }}</span>
+        {%- elif config.author and config.extra.show_default_author %}
+        <span>//</span>
+        <span>{{ config.author }}</span>
+        {%- endif %}
+        {%- if page.draft %}
+        <span class="post-item__draft">DRAFT</span>
+        {%- endif %}
+    </div>
+    {%- if page.taxonomies %}
+    <div class="post-article__tags">
+        {%- for tag in page.taxonomies.tags | default(value=[]) %}
+        {%- set tag_url = get_taxonomy_url(kind="tags", name=tag, lang=page.lang) %}
+        <span>#<a {% if not is_excerpt %}rel="tag" {% endif %}href="{{ tag_url | safe }}">{{ tag }}</a></span>
+        {%- endfor %}
+        {%- for cat in page.taxonomies.categories | default(value=[]) %}
+        {%- set cat_url = get_taxonomy_url(kind="categories", name=cat, lang=page.lang) %}
+        <span>{<a {% if not is_excerpt %}rel="tag" {% endif %}href="{{ cat_url | safe }}">{{ cat }}</a>}</span>
+        {%- endfor %}
+    </div>
+    {%- endif %}
+</header>
+{%- endmacro -%}

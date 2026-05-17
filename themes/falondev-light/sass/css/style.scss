@@ -11,16 +11,17 @@
 /* ── Variables ───────────────────────────────────────────── */
 
 :root {
-  --yellow:      #f5c518;
-  --yellow-dk:   #a07e0c;
-  --bg:          #090909;
-  --surface:     #111111;
-  --surface-2:   #181818;
-  --line:        #242424;
-  --line-bright: #333333;
-  --text:        #cccccc;
-  --text-dim:    #757575;
-  --text-muted:  #383838;
+  --yellow:      #c07800;
+  --yellow-dk:   #8a5500;
+  --bg:          #f0ebe2;
+  --surface:     #fdfcf8;
+  --surface-2:   #f5f2eb;
+  --line:        #d8d0c4;
+  --line-bright: #bfb5a8;
+  --text:        #1c1a16;
+  --text-dim:    #56524c;
+  --text-muted:  #a89e90;
+  --dot-color:   #ccc4b8;
 }
 
 /* ── Base ────────────────────────────────────────────────── */
@@ -36,6 +37,8 @@ body {
   line-height: 1.6;
   color: var(--text);
   background: var(--bg);
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 22px 22px;
   min-height: 100vh;
   padding: 2rem 1rem;
   -webkit-font-smoothing: antialiased;
@@ -59,6 +62,7 @@ a {
   padding: 2.5rem 3rem;
   background: var(--surface);
   border: 1px solid var(--line);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.06);
   position: relative;
   min-height: calc(100vh - 4rem);
   display: flex;
@@ -845,13 +849,15 @@ a {
 
 @media print {
   body {
-    background: #fff;
+    background: #fff !important;
+    background-image: none !important;
     color: #1a1a1a;
     padding: 0;
   }
 
   .site-wrapper {
     border: none;
+    box-shadow: none;
     padding: 1.5cm 2cm;
     max-width: none;
     background: #fff;

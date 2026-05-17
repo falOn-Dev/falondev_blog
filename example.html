@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ personal.name }} — Resume</title>
+  <style>{{ style }}</style>
+</head>
+<body>
+  <button class="pdf-btn" onclick="window.print()">[ download pdf ]</button>
+  <div class="resume">
+
+    <header class="resume-header">
+      <div class="resume-header__identity">
+        <h1 class="resume-header__name">{{ personal.name }}</h1>
+        <p class="resume-header__summary">{{ personal.summary }}</p>
+      </div>
+      <ul class="resume-header__contact">
+        <li class="contact-item contact-item--email"><a href="mailto:{{ personal.email }}">{{ personal.email }}</a></li>
+        {% if personal.phone %}
+        <li class="contact-item contact-item--phone">{{ personal.phone }}</li>
+        {% endif %}
+        <li class="contact-item contact-item--location">{{ personal.location }}</li>
+        {% if personal.socials %}
+        {% for social in personal.socials %}
+        <li class="contact-item contact-item--social">
+          <span class="contact-item__label">{{ social.platform }}</span>
+          <a class="contact-item__link" href="http://{{ social.url }}">{{ social.url }}</a>
+        </li>
+        {% endfor %}
+        {% endif %}
+      </ul>
+    </header>
+
+    <main class="resume-body">
+
+      <section class="resume-section resume-section--skills">
+        <h2 class="resume-section__heading">Skills</h2>
+        <ul class="skillsets">
+          {% for skillset in skills %}
+          <li class="skillset">
+            <span class="skillset__category">{{ skillset.category }}</span>
+            <ul class="skillset__items">
+              {% for skill in skillset.skills %}
+              <li class="skillset__item">{{ skill }}</li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="resume-section resume-section--experience">
+        <h2 class="resume-section__heading">Experience</h2>
+        <div class="resume-section__entries">
+          {% for job in experience %}
+          <article class="entry entry--experience">
+            <div class="entry__header">
+              <div class="entry__title-block">
+                <span class="entry__role">{{ job.title }}</span>
+                <span class="entry__org">{{ job.company }}</span>
+              </div>
+              <div class="entry__meta">
+                <span class="entry__location">{{ job.location }}</span>
+                <span class="entry__dates">
+                  <span class="entry__date entry__date--start">{{ job.start.year }}-{{ job.start.month }}</span>
+                  <span class="entry__date-sep">–</span>
+                  {% if job.end == "present" %}
+                  <span class="entry__date entry__date--present">Present</span>
+                  {% else %}
+                  <span class="entry__date entry__date--end">{{ job.end.year }}-{{ job.end.month }}</span>
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+            <ul class="entry__bullets">
+              {% for bullet in job.bullets %}
+              <li class="entry__bullet">{{ bullet }}</li>
+              {% endfor %}
+            </ul>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="resume-section resume-section--education">
+        <h2 class="resume-section__heading">Education</h2>
+        <div class="resume-section__entries">
+          {% for edu in education %}
+          <article class="entry entry--education">
+            <div class="entry__header">
+              <div class="entry__title-block">
+                <span class="entry__degree">{{ edu.degree }}</span>
+                {% if edu.concentration %}
+                <span class="entry__concentration">{{ edu.concentration }}</span>
+                {% endif %}
+                <span class="entry__org">{{ edu.institution }}</span>
+              </div>
+              <div class="entry__meta">
+                <span class="entry__dates">
+                  <span class="entry__date entry__date--start">{{ edu.start.year }}</span>
+                  <span class="entry__date-sep">–</span>
+                  <span class="entry__date entry__date--end">{{ edu.end.year }}</span>
+                </span>
+                {% if edu.honors %}
+                <span class="entry__honors">{{ edu.honors }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="resume-section resume-section--projects">
+        <h2 class="resume-section__heading">Projects</h2>
+        <div class="resume-section__entries">
+          {% for project in projects %}
+          <article class="entry entry--project">
+            <div class="entry__header">
+              <div class="entry__title-block">
+                <span class="entry__project-name">{{ project.name }}</span>
+                {% if project.url %}
+                <a class="entry__project-url" href="http://{{ project.url }}">{{ project.url }}</a>
+                {% endif %}
+              </div>
+            </div>
+            <p class="entry__description">{{ project.description }}</p>
+            <ul class="entry__highlights">
+              {% for highlight in project.highlights %}
+              <li class="entry__highlight">{{ highlight }}</li>
+              {% endfor %}
+            </ul>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
