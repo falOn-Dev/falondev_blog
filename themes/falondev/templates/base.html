@@ -3,7 +3,7 @@
 {%- import "macros/post.html" as post_macros -%}
 
 <!doctype html>
-<html lang="{{ lang }}">
+<html lang="{{ lang }}" class="{{ config.extra.theme_mode | default(value='dark') }}">
 
 <head>
     <meta charset="utf-8">
@@ -45,8 +45,13 @@
     {%- endif %}
     {%- endblock %}
     <meta name="robots" content="index, follow">
+    {%- if config.extra.theme_mode == "light" %}
+    <meta name="theme-color" content="#f0ebe2">
+    <meta name="color-scheme" content="light">
+    {%- else %}
     <meta name="theme-color" content="#090909">
     <meta name="color-scheme" content="dark">
+    {%- endif %}
 
     {%- if current_path and current_path == "/" %}
     <meta property="og:title" content="{{ config.title }}">
