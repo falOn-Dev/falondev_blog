@@ -940,6 +940,68 @@ a {
   }
 }
 
+/* ── Table of contents ───────────────────────────────────── */
+
+.toc {
+  border: 1px solid var(--line);
+  margin-bottom: 2rem;
+
+  &[open] .toc__toggle::before {
+    content: 'v ';
+  }
+}
+
+.toc__toggle {
+  padding: 0.3rem 0.75rem;
+  color: var(--yellow-dk);
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.83rem;
+
+  &::before {
+    content: '> ';
+    color: var(--yellow-dk);
+  }
+
+  &:hover {
+    background: var(--surface-2);
+  }
+}
+
+.toc__list {
+  list-style: none;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+
+  &--nested {
+    padding: 0.15rem 0 0 1.1rem;
+  }
+}
+
+.toc__item {
+  margin-bottom: 0.2rem;
+
+  a {
+    font-size: 0.83rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding-left: 1.1rem;
+    position: relative;
+    display: inline-block;
+
+    &::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: var(--yellow-dk);
+    }
+
+    &:hover {
+      color: var(--yellow);
+    }
+  }
+}
+
 /* ── Print ───────────────────────────────────────────────── */
 
 @media print {
@@ -972,7 +1034,8 @@ a {
 
   #back-to-top,
   #theme-toggle,
-  .copy-btn {
+  .copy-btn,
+  .toc {
     display: none;
   }
 

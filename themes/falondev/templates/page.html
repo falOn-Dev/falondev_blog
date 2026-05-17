@@ -13,6 +13,7 @@
 {%- block main -%}
 <article class="post-article">
     {{ post_macros::header(page=page, heading="h1") }}
+    {% include "partials/toc.html" %}
     <div class="post-content" id="continue-reading">
 {{ page.content | safe }}
     </div>
