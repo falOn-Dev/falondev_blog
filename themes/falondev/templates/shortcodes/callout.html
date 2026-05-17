@@ -1,0 +1,5 @@
+{%- set type = type | default(value="note") -%}
+<div class="callout callout--{{ type }}">
+  <span class="callout__label">{{ type }}</span>
+  <div class="callout__body">{{ body | markdown | safe }}</div>
+</div>

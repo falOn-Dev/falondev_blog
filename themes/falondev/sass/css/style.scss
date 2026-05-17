@@ -578,7 +578,7 @@ a {
     height: auto;
   }
 
-  figure {
+  figure:not(.yt-embed) {
     margin: 1.5rem auto;
     width: fit-content;
 
@@ -937,6 +937,74 @@ a {
   &:hover {
     border-color: var(--yellow);
     color: var(--yellow);
+  }
+}
+
+/* ── YouTube embed ───────────────────────────────────────── */
+
+.yt-embed {
+  margin: 1.5rem auto;
+  width: 100%;
+
+  &__player {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--line);
+    }
+  }
+
+  &__caption {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0.4rem;
+    font-style: italic;
+  }
+}
+
+/* ── Callout boxes ───────────────────────────────────────── */
+
+.callout {
+  margin: 1.25rem 0;
+  padding: 0.6rem 0.9rem;
+  border-left: 3px solid var(--line-bright);
+  font-size: 0.85rem;
+
+  &__label {
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
+
+    &::before {
+      content: '// ';
+      color: var(--text-muted);
+    }
+  }
+
+  &__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  &--note {
+    border-left-color: var(--line-bright);
+    .callout__label { color: var(--text-muted); }
+  }
+
+  &--tip {
+    border-left-color: var(--yellow-dk);
+    .callout__label { color: var(--yellow-dk); }
+  }
+
+  &--warning {
+    border-left-color: #c0392b;
+    .callout__label { color: #c0392b; }
   }
 }
 

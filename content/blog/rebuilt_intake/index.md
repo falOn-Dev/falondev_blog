@@ -25,16 +25,16 @@ Our main goals for the intake were simplicity and maintainability. Every part wi
 Given those goals, as well as a few other points like packaging, we chose a rack and pinion intake. It's light, simple, and most importantly, can be completely pulled out after removing a backstop bar for maintenance purposes.
 
 # Layout and Block CAD
-![OnShape Layout Sketch of Intake](layout.png)
+{{ figure(src="layout.png", alt="OnShape layout sketch of the rack and pinion intake", caption="Layout sketch showing the drivebase, deploy position, ball path, and stow position") }}
 
 The first step in designing a mechanism is doing some layout sketches, in the case of the intake this includes the drivebase, the deploy position (and ball path), and the stow position. This lets us work out some basic geometry, as well as deciding on things like roller diameters and power transmissions.
 
-![OnShape Block CAD](block_cad.png)
+{{ figure(src="block_cad.png", alt="OnShape block CAD of the intake mechanism", caption="Block CAD used to check clearances and interactions with surrounding mechanisms before detailed design") }}
 
 After a layout is created, I start working on a more detailed 3D "block CAD" to help me work out how it interacts with other mechanisms, sorting out collisions before I spent a lot of time on the detailed CAD.
 
 # Detailed Design
-![Finished CAD Design](intake_cad.png)
+{{ figure(src="intake_cad.png", alt="Finished CAD of the rack and pinion intake", caption="Final intake design — polycarbonate frame, stub shafts, and 2in grip tape rollers with 3/4in compression") }}
 
 Once I have my layout and block CAD, the team begins to prototype based on them to figure out critical geometry like compression, we came to the conclusion that 2in rollers with grip tape, and 3/4in of compression worked best.
 

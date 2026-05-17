@@ -19,11 +19,11 @@ Log Replay is the idea of being able to take data from matches where something d
 
 This is achieved by splitting your Robot's code into "Inputs" and "Outputs" where Inputs are things that get read into your code, and processed, like sensor data, and Outputs are the results of the processed inputs.
 
-![AdvantageKit Data Flow Flowchart](log_replay_flow.png)
+{{ figure(src="log_replay_flow.png", alt="AdvantageKit data flow flowchart showing inputs and outputs split for log replay", caption="AdvantageKit data flow — inputs are recorded and replayed, outputs are recalculated") }}
 
 The most common way to make that split is with "Hardware Abstraction", the process of encapsulating your hardware and possible interactions with it into subclasses of an interface. This interface contains the same methods regardless of hardware, so the rest of the code doesn't care what hardware is being used. You also handle logging in these "IO Layers" to keep things simple.
 
-![AdvantageKit Control Flow Flowchart](akit_control_flow.png)
+{{ figure(src="akit_control_flow.png", alt="AdvantageKit control flow flowchart showing hardware abstraction via IO layers", caption="IO layers decouple robot logic from hardware — the same code runs in sim and on the real robot") }}
 
 Although these "IO Layers" are used to allow easy replayability by swapping out the implementations with the blank interface, so no hardware is controlled, and AdvantageKit can feed recorded inputs back into your code through the IO layers, they also make simulation much easier to implement. 
 
@@ -41,7 +41,7 @@ As you may remember, the previous section touched on determining robot poses fro
 
 Vision Processing is the concept of taking in images and pulling data from them. In the case of FRC this can be used to determine your robots position. Scattered around the field there are these things called AprilTags, they're essentially tiny QR codes that allow the robot to determine where it is. The drivetrain's odometry can have vision measurements passed in to improve its knowledge of where it is
 
-![AprilTag Robots](april_tag_bots.jpg)
+{{ figure(src="april_tag_bots.jpg", alt="FRC robots tracking AprilTags on the field", caption="AprilTags are placed around the field to give robots a fixed reference for pose estimation") }}
 
 One option for vision processing in FRC is a library called "PhotonVision", and this is what I used for this project, as it can be ran on a wide range of hardware, as well as having a good simulation system. Once again, with the use of IO layers, implementing this in sim will *hopefully* translate very well to a real camera.
 
@@ -55,5 +55,5 @@ When our vision is looking at AprilTags to determine our pose, we have no way of
 
 After all of that, we get this final result. This is a great basis for developing an FRC robot, and I'm very excited to use what I've learned next year to be testing code weeks before anything is finished building.
 
-{{<youtube MO0RF5FrjcY>}}
+{{ youtube(id="MO0RF5FrjcY") }}
 
